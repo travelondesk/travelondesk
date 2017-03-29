@@ -1,0 +1,64 @@
+{% extends "travelondesk/travelondesk_base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+<div class="container">	
+<hr>
+<div class="row">
+<div class="col-lg-6">
+<p>{% trans "All your feedback and suggestions about this site, cooperation and advertising, send to " %}<strong>travelondesk.contact@gmail.com</strong>{% trans " or use the feedback form." %}</p>
+<p>{% trans "Your feedback make it possible for us to develop this project." %}<p> 
+<p>{% trans "Best regards, "%}<strong>Travelondesk!</strong> </p>
+</div>
+<div class="col-lg-6">
+<form class="post-form form-horizontal" action="{% url 'travelondesk:contact' %}" method="post">{% csrf_token %}
+    {{ form.non_field_errors }}
+	<div class="form-group">
+	  <label class="control-label col-sm-2" for="id_subject">{%trans "Theme:" %}</label>
+	  <div class="col-sm-10">{{ form.subject }}
+	  {{ form.subject.errors }}</div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label col-sm-2" for="id_sender">{%trans "E-mail:" %}</label>
+	  	 <div class="col-sm-10"> {{ form.sender }}
+		  {{ form.sender.errors }}</div>
+	</div>
+	
+	<div class="form-group" >
+	  <label class="control-label col-sm-2" for="id_message">{%trans "Message:" %}</label>
+	  <div class="col-sm-10">{{ form.message }}
+	  {{ form.message.errors }}</div>
+	</div>
+	
+	<div align="right">
+	  <label for="id_copy">{% trans "Send me copy" %}</label>
+	  <input id="id_copy" name="copy" type="checkbox">
+	  {{ form.copy.errors }}
+	 </div> 
+	 <hr>
+	<div align="right">
+		<button class="btn btn-md btn-primary" type="submit">{% trans "Send" %}</button>
+	</div>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+	<script>if ($(document).height() <= $(window).height())
+		$("footer.footer").addClass("navbar-fixed-bottom");</script>
+	<style>
+	p { 
+    text-indent: 2em; /* Отступ первой строки */
+    text-align: justify; /* Выравнивание по ширине */
+   }
+	</style>
+{% endblock %}
+</body>
+</html>

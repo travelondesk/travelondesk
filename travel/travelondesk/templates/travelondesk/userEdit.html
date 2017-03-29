@@ -1,0 +1,79 @@
+{% extends "travelondesk/travelondesk_base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+    <div class="container">
+			{% if username == user %}
+			<h2>{% trans "Edit: " %}</h2>
+			<hr>
+			<form method="POST" class="post-form form-horizontal" enctype="multipart/form-data">{% csrf_token %}
+				<div class="row">
+				<div class="col-xs-6">
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="id_name">{% trans "First name" %}</label>
+					<div class="col-sm-8">
+						{{ form.first_name }}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-3" for="id_name">{% trans "Last name" %}</label>
+					<div class="col-sm-8">
+						{{ form.last_name }}
+					</div>
+				</div>
+				{{ form.errors }}
+				</div>
+				</div>
+				<h3 align="left">
+				<button type="submit" class="btn btn-sm btn-success">{% trans "Save" %}</button>
+				</h3>
+			</form>
+			{% endif %}
+    </div>
+{% endblock %}
+{% block script %}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+<script>if ($(document).height() <= $(window).height())
+		$("footer.footer").addClass("navbar-fixed-bottom");</script>
+<script type="text/javascript">
+function addStyle() {
+	var arrayInput = document.getElementsByTagName("input");
+	var arrayTextarea = document.getElementsByTagName("textarea");
+	var arraySelect = document.getElementsByTagName("select");
+	for(var i=0; i<arrayInput.length; i++) {
+		document.getElementsByTagName("input")[i].setAttribute("class", "form-control");
+	}
+	for(var j=0; j<arrayTextarea.length; j++) {
+		document.getElementsByTagName("textarea")[j].setAttribute("class", "form-control");
+	}
+	for(var k=0; k<arraySelect.length; k++) {
+		document.getElementsByTagName("select")[k].setAttribute("class", "form-control");
+	}
+};
+addStyle();
+</script>
+<style>
+    #map {
+        height: 298px;
+    }
+	.form-control {
+		width: 80%;
+	}
+	.btn-sm {
+		font-size: 20px;
+	}
+	.btn-file { position: relative; overflow: hidden; margin-right: 4px; }
+	.btn-file input { position: absolute; top: 0; right: 0; margin: 0; opacity: 0; filter: alpha(opacity=0);
+    transform: translate(-300px, 0) scale(4); font-size: 23px; direction: ltr; cursor: pointer; }
+</style>
+{% endblock %}
+</body>
+</html> 

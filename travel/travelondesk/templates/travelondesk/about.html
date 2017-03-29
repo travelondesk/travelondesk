@@ -1,0 +1,41 @@
+{% extends "travelondesk/travelondesk_base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+<div class="container">	
+<h1>{% trans "About" %}</h1>
+<hr>
+<p><strong>Travelondesk</strong> - это единая доска объявлений для путешественников по всему миру. 
+   Проект создан с целью помощи людям быстрее находить необходимые им услуги и товары в стране пребывания.
+   А также самим оказывать услуги другим путешественникам.
+   Размещайте информацию о своих услугах, которые могут быть полезны путешественникам в вашей стране.
+   Размещайте свои запросы о том, что вам нужно в стране, которую хотите посетить.
+   Находите интересующие вас услуги.
+   Аренда жилья и транспорта, заказ экскурсий и туров, поиск необходимых товаров и услуг - это и многое другое вы можете найти на Travelondesk.</p>
+<em><p><strong>Зарегистрируйтесь на сайте и добавляйте свои услуги либо запросы, нажав соответствующую кнопку на панели сверху:</strong></p></em>
+<p><strong>{% trans "Add service" %}</strong> - добавляйте свои услуги, которые могут помочь путешественникам в вашей стране;</p>
+<p><strong>{% trans "Add demand" %}</strong> - добавляйте свои запросы о том, что вам нужно в стране, в которую собираетесь отправиться.</p>
+<em><p><strong>Или просто выбирайте интересующую вас страну и:</strong></p></em>
+<p>Просматривайте запросы, оставленные пользователями - быть может именно Вы сможете им помочь;</p>
+<p>Просматривайте размещенные услуги - скорее всего вы найдете то, что вам нужно.</p>
+</div>
+{% endblock %}
+
+	{% block script %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+	<script>if ($(document).height() <= $(window).height())
+		$("footer.footer").addClass("navbar-fixed-bottom");</script>
+		
+	<style>
+   p { 
+    text-indent: 2em; /* Отступ первой строки */
+    text-align: justify; /* Выравнивание по ширине */
+   }
+  </style> 
+  {% endblock %}
+</body>
+</html>

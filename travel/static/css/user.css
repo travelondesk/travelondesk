@@ -1,0 +1,9 @@
+.navbar-fixed-bottom{
+  margin-bottom: 20px!important;
+}
+input[type="checkbox"] {
+	height: 20px;
+	width: 20px;
+	vertical-align: middle;
+	margin: 0px!important;
+}

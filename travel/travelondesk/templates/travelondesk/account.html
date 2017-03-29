@@ -1,0 +1,41 @@
+{% extends "travelondesk/travelondesk_base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+	<div class="container">
+	<div class="row">
+	<hr>
+		<div class="col-md-6">
+			<h3>{% trans "Userinfo" %} {{userAccount.username}}</h3>
+			<p>{% trans "Username:" %} {{userAccount.username}}</p>
+			<p>{% trans "Email:" %} {{userAccount.email}}</p>
+			<p>{% trans "First name:" %} {{userAccount.first_name}}</p>
+			<p>{% trans "Last name:" %} {{userAccount.last_name}}</p>
+			<p>{% trans "Register date:" %} {{userAccount.date_joined}}</p>
+			<hr>
+			{% if user.id == userAccount.id %}
+			<ul class="list-inline">
+				<li><p><a href="{% url 'travelondesk:userServiceTickets' userAccount.username %}">{% trans "My Services" %}</a> </li>
+				<li>|</li>
+				<li><a href="{% url 'travelondesk:userDemandTickets' userAccount.username %}">{% trans "My Demands" %}</a></p></li>
+				<li>|</li>
+				<li><p><a href="{% url 'travelondesk:userEdit' user.username %}">{% trans "Edit" %}</a></li>
+				<li>|</li>
+				<li><a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a></p></li>
+			</ul>
+			{% endif %}
+		</div>
+	</div>	
+	</div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+	<script>if ($(document).height() <= $(window).height())
+		$("footer.footer").addClass("navbar-fixed-bottom");</script>
+{% endblock %}		
+</body>
+</html>

@@ -1,0 +1,32 @@
+from django.conf.urls import include, url
+from django.conf import settings
+from travelondesk import views
+
+urlpatterns = [url(r'^$', views.index, name='index'),
+    url(r'^demandTickets/$', views.demandListView, name='demandTickets'),
+    url(r'^serviceTickets/$', views.serviceListView, name='serviceTickets'),
+    #url(r'^(?P<country_id>[0-9]+)/serviceTickets/$', views.countryServiceListView, name='countryServiceTickets'),
+    url(r'^(?P<country_shortName>[A-Z]+)/serviceTickets/$', views.countryServiceListView, name='countryServiceTickets'),
+    url(r'^(?P<country_shortName>[A-Z]+)/demandTickets/$', views.countryDemandListView, name='countryDemandTickets'),
+    url(r'^serviceTickets/(?P<ticket_category>[a-z]+)$', views.categoryServiceListView, name='categoryServiceTickets'),
+    url(r'^demandTickets/(?P<ticket_category>[a-z]+)$', views.categoryDemandListView, name='categoryDemandTickets'),
+    url(r'^(?P<country_shortName>[A-Z]+)/serviceTickets/(?P<ticket_category>[a-z]+)$', views.countryCategoryServiceListView, name='countryCategoryServiceTickets'),
+    url(r'^(?P<country_shortName>[A-Z]+)/demandTickets/(?P<ticket_category>[a-z]+)$', views.countryCategoryDemandListView, name='countryCategoryDemandTickets'),
+    url(r'^demand/(?P<pk>[0-9]+)/$', views.DemandDetailView.as_view(), name='demandDetail'),
+    url(r'^service/(?P<pk>[0-9]+)/$', views.ServiceDetailView.as_view(), name='serviceDetail'),
+    url(r'^newService/$', views.serviceTicketNew, name='serviceTicketNew'),
+    url(r'^newDemand/$', views.demandTicketNew, name='demandTicketNew'),
+    url(r'^service/(?P<pk>[0-9]+)/edit/$', views.serviceEdit, name='serviceEdit'),
+    url(r'^demand/(?P<pk>[0-9]+)/edit/$', views.demandEdit, name='demandEdit'),
+    url(r'^accounts/(?P<user>[\w.@+-]+)/$', views.accountView, name='account'),
+    url(r'^accounts/(?P<user>[\w.@+-]+)/edit/$', views.userEdit, name='userEdit'),
+    url(r'^serviceTickets/(?P<user>[\w.@+-]+)/$', views.userServiceListView, name='userServiceTickets'),
+    url(r'^demandTickets/(?P<user>[\w.@+-]+)/$', views.userDemandListView, name='userDemandTickets'),
+    url(r'^contact/$', views.contactView, name='contact'),
+    url(r'^thanks/$', views.thanksView, name='thanks'),
+    url(r'^about/$', views.aboutView, name='about'),
+    url(r'^term/$', views.termOfServiceView, name='term'),
+    url(r'^deleteDemand/(?P<pk>[0-9]+)/$', views.deleteDemandTicket, name='deleteDemand'),
+    url(r'^deleteService/(?P<pk>[0-9]+)/$', views.deleteServiceTicket, name='deleteService'),
+    #url(r'^i18n/', include('django.conf.urls.i18n')),
+]

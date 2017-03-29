@@ -1,0 +1,300 @@
+{% extends "travelondesk/travelondesk_base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+    <div class="container">
+	{% if user.is_authenticated %}
+			<h1>{% trans "New demand" %}</h1>
+			<hr>
+			<form method="POST" class="post-form form-horizontal" enctype="multipart/form-data">{% csrf_token %}
+				<div class="row">
+				<div class="col-xs-12 col-md-6 col-lg-6">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="id_name">{% trans "Name" %}</label>
+						<div class="col-sm-10">
+							{{ form.name }}
+							<strong>{{form.errors.name}}</strong>
+						</div>
+					</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="id_category">{% trans "Category" %}</label>
+					<div class="col-sm-6">
+						{{ form.category }}
+						<strong>{{form.errors.category}}</strong>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="id_description">{% trans "Description" %}</label>
+					<div class="col-sm-10">
+						{{ form.description }}
+						<strong>{{form.errors.description}}</strong>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="id_phone">{% trans "Phone" %}</label>
+					<div class="col-sm-10">
+						{{ form.phone }}
+						<strong>{{form.errors.phone}}</strong>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="id_email">{% trans "E-mail" %}</label>
+					<div class="col-sm-10">
+						{{ form.email }}
+						<strong>{{form.errors.email}}</strong>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="id_date">{% trans "Coast" %}</label>
+					<div class="col-sm-4">
+						{{ form.coast }}
+						<strong>{{form.errors.coast}}</strong>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="id_img">{% trans "Imagine" %}</label>
+					<div class="col-sm-10">
+					<span class="btn btn-info btn-file">
+						<i class="icon-plus"></i><span>{% trans "Choose picture..." %}</span>
+						{{ form.img }}
+						<strong>{{form.errors.img}}</strong>
+					</span>
+					</div>
+				</div>
+				</div>
+				<div class="col-xs-12 col-md-6 col-lg-6">
+				<strong>{{form.non_field_errors}}</strong>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="id_name">{% trans "State" %}</label>
+					<div class="col-sm-6">
+						{{ form.state }}
+						<strong>{{form.errors.state}}</strong>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="id_name">{% trans "Place" %}</label>
+					<div class="col-sm-10">
+						{{ form.place }}
+						<strong>{{form.errors.place}}</strong>
+					</div>
+				</div>
+				<hr>
+				<div>
+					<div id="map"></div>
+					<hr>
+				</div>
+				
+				<div id="placeDetail">
+				</div>
+				</div>
+				</div>
+				
+				<h1 align="left">
+				<button type="submit" class="btn btn-sm btn-success">{% trans "Save" %}</button>
+				</h1>
+			</form>
+		{% endif %}	
+    </div>
+{% endblock %}
+{% block script %}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO2MASVqjjEiWhbKUSsjpIGOSFPWzoD_M&libraries=places&callback=initMap" async defer></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+<script>if ($(document).height() <= $(window).height())
+		$("footer.footer").addClass("navbar-fixed-bottom");</script>
+<script type="text/javascript">
+var input = document.getElementById('id_place'); //field for enter address
+var geocoder;
+var autocomplete;
+var map;
+var marker;
+var dragData; //geodata for drag marker
+var place; 
+//Components form for address and relation with google data
+var componentForm = {
+  locality: 'id_city',
+  administrative_area_level_1: 'id_region',
+  country: 'id_country',
+  latitude: 'id_latitude',
+  longitude: 'id_longitude',
+  countryShort: 'id_countryShort'
+};
+
+//add class for input field for using bootstrap
+function addStyle() {
+	var arrayInput = document.getElementsByTagName("input");
+	var arrayTextarea = document.getElementsByTagName("textarea");
+	var arraySelect = document.getElementsByTagName("select");
+	for(var i=0; i<arrayInput.length; i++) {
+		document.getElementsByTagName("input")[i].setAttribute("class", "form-control");
+	}
+	for(var j=0; j<arrayTextarea.length; j++) {
+		document.getElementsByTagName("textarea")[j].setAttribute("class", "form-control");
+	}
+	for(var k=0; k<arraySelect.length; k++) {
+		document.getElementsByTagName("select")[k].setAttribute("class", "form-control");
+	}
+}
+
+addStyle();
+
+//Add field for save address data
+function addPlaceDetail() {
+	var placeDetailDiv = document.getElementById("placeDetail");
+	for (var component in componentForm) {
+		var inputPlace = document.createElement('input');
+		inputPlace.id = componentForm[component];
+		inputPlace.setAttribute('name', componentForm[component].substring(3));
+		inputPlace.setAttribute('type', 'hidden');
+		inputPlace.setAttribute("class", "form-control");
+		placeDetailDiv.appendChild(inputPlace);
+	};
+}
+
+//Clear field for save address data
+function clearPlaceDetail() {
+	for (var component in componentForm) {
+    document.getElementById(componentForm[component]).value = '';
+  }
+}
+
+//Init map
+function initMap() {
+	var myLatLng = {lat: -25.363, lng: 131.044};
+	autocomplete = new google.maps.places.Autocomplete(input);
+	autocomplete.addListener('place_changed', setAddress);
+	geocoder = new google.maps.Geocoder();
+	map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 4,
+		center: myLatLng
+	});
+	marker = new google.maps.Marker({
+			position: myLatLng,
+			map: map,
+			draggable: true});
+	addPlaceDetail();
+	addCity();
+	google.maps.event.addListener(marker, 'drag', function() {
+		geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				if (results[0]) {
+					dragData = results[0];
+					$('#id_place').val(results[0].formatted_address);
+					changeAddress();
+				}
+			}			
+		});
+    });
+}
+
+//Fill address at search
+function setAddress (){
+	place = autocomplete.getPlace();
+	console.log(place);
+	if (place.geometry) {
+		map.panTo(place.geometry.location);
+		map.setZoom(10);
+		marker.setPosition(place.geometry.location);
+		clearPlaceDetail();
+		fillAddress(place);
+		fillCity();
+	} 
+	else {
+		document.getElementById('id_place').placeholder = 'Enter a city';
+    }
+}
+
+//Change address at drag marker
+function changeAddress () {
+	place = dragData;
+	if (place.geometry) {
+		clearPlaceDetail();
+		fillAddress(place);
+		fillCity()
+	}
+}
+
+//Fill address field
+function fillAddress (place) {
+	document.getElementById('id_latitude').value = place.geometry.location.lat();
+	document.getElementById('id_longitude').value = place.geometry.location.lng();
+	for (var i = 0; i < place.address_components.length; i++) {
+		var addressType = place.address_components[i].types[0];
+		console.log(addressType);
+		if (componentForm[addressType]) {
+		  var val = place.address_components[i]['long_name'];
+		  if (addressType == 'country') {
+			var shortName = place.address_components[i]['short_name']
+			document.getElementById('id_countryShort').value = shortName;
+		  }
+		  document.getElementById(componentForm[addressType]).value = val;
+		}
+	}	
+}
+
+//Fill country and city
+function fillCity() {
+	var placeDetailDiv = document.getElementById("placeDetail");
+	var divPlace = document.getElementById("countryCity");
+	divPlace.innerHTML = '';
+	divPlace.style.visibility='visible';
+	divPlace.innerHTML = document.getElementById("id_country").value;
+	if (document.getElementById("id_city").value.length > 0) {
+		divPlace.innerHTML = divPlace.innerHTML + ', ' + document.getElementById("id_city").value;
+	}
+	placeDetailDiv.appendChild(divPlace);
+}
+//Add element for visible city and country
+function addCity() {
+	var placeDetailDiv = document.getElementById("placeDetail"); 
+	var divPlace = document.createElement('div');
+	divPlace.setAttribute("class", "alert alert-success");
+	divPlace.setAttribute("role", "alert");
+	divPlace.setAttribute("id", "countryCity");
+	divPlace.style.visibility='hidden'; 
+	placeDetailDiv.appendChild(divPlace);
+}
+(function ($){
+                $(function (){
+                    $('.btn-file').each(function (){
+                        var self = this;
+                        $('input[type=file]', this).change(function (){
+                            // remove existing file info
+                            $(self).next().remove();
+                            // get value
+                            var value = $(this).val();
+                            // get file name
+							console.log(value)
+                            var fileName = value.substring(value.lastIndexOf('\\')+1);
+                            // get file extension
+                            var fileExt = fileName.split('.').pop().toLowerCase();
+                            // append file info
+                            $('<span><i class="icon-file icon-' + fileExt + '"></i> ' + fileName + '</span>').insertAfter(self);
+                        });
+                    });
+                });
+            })(jQuery);
+</script>
+<style>
+    #map {
+        height: 298px;
+    }
+	.form-control {
+		width: 80%;
+	}
+	.btn-sm {
+		font-size: 20px;
+	}
+	.btn-file { position: relative; overflow: hidden; margin-right: 4px; }
+	.btn-file input { position: absolute; top: 0; right: 0; margin: 0; opacity: 0; filter: alpha(opacity=0);
+    transform: translate(-300px, 0) scale(4); font-size: 23px; direction: ltr; cursor: pointer; }
+</style>
+{% endblock %}
+</body>
+</html> 

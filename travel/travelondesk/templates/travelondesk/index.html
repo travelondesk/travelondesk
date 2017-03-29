@@ -1,0 +1,98 @@
+{% extends "travelondesk/travelondesk_base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+	{% block content %}
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Travelondesk</h1> 
+        <h4>{% trans "It's a classified advertising for travelers around the world:" %}</h4>
+		<h4>{% trans "House and transport rent" %}</h4>
+		<h4>{% trans "Booking trips and tours" %}</h4>
+		<h4>{% trans "Search for necessary goods and services and much more" %}</h4>
+        <p><a class="btn btn-primary btn-lg" href="{% url 'travelondesk:about' %}"" role="button">{% trans "Learn more »" %}</a></p>
+      </div>
+    </div>
+
+	<div class="container">
+	<div class="row" align="center">
+	{% get_available_languages as LANGUAGES %}
+	{% get_current_language as LANGUAGE_CODE %}	
+	<p class="language-form">{% trans "Language: " %}</p>
+		{% for lang in LANGUAGES %}
+		  <form class="language-form" name="setLang{{ lang.1}}" action="/i18n/setlang/" method="POST">
+		  {% csrf_token %}
+			<input name="next" type="hidden" value="/travelondesk">
+			<input type="hidden" name="language" value="{{ lang.0 }}">
+			<a href="#" onclick="document.setLang{{ lang.1 }}.submit();return false;">{% if lang.0 == "en" %}English{% else %}{{ lang.1 }}{% endif %}</a>
+			{% if lang.0 == "ru" %}
+				<p class="language-form">|</p>
+			{% endif %}
+		  </form>
+		{% endfor %}
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-xs-6">
+			<p class="lead" style="text-indent: 2em;">{% trans "Publish your demands, and people in the country that you are going to visit will help you" %}</p>
+		</div>
+		<div class="col-xs-6">
+			<p class="lead" style="text-indent: 2em;">{% trans "Add your services, products and everything that you can help a traveler in your country" %}</p>
+		</div>
+	</div>
+	<div class="row">
+	<div class="col-xs-6">
+	<h3><a href="{% url 'travelondesk:demandTickets' %}">{% trans "Demands" %}</a>{% if user.is_authenticated %}<a href="{% url 'travelondesk:demandTicketNew' %}"><img width="20" alt="{% trans 'Add' %}" src="{% static 'images/w128h1281338911594add.png' %}"></a>{% endif %}</h3>
+	<ul class="nav nav-pills" role="tablist">
+	  {% for countryD in country_list %}
+	 	  {% if countryD.countDemand > 0 %}
+				<li role="presentation"><a href="{% url 'travelondesk:countryDemandTickets' countryD.shortName %}">{% if LANGUAGE_CODE == "ru" %}{{ countryD.name }}{% else %}{{countryD.intName}}{% endif %}<span class="badge" style="background-color:#5cb85c">{{ countryD.countDemand }}</span></a></li>
+		  {% elif countryD.popular %}
+				<li role="presentation"><a href="{% url 'travelondesk:countryDemandTickets' countryD.shortName %}">{% if LANGUAGE_CODE == "ru" %}{{ countryD.name }}{% else %}{{countryD.intName}}{% endif %}<span class="badge">{{ countryD.countDemand }}</span></a></li>
+		  {% endif %} 
+	  {% endfor %}	 
+	</ul>
+	</div>
+	<div class="col-xs-6">
+	<h3><a href="{% url 'travelondesk:serviceTickets' %}">{% trans "Services" %}</a>{% if user.is_authenticated %}<a href="{% url 'travelondesk:serviceTicketNew' %}"><img width="20" alt="{% trans 'Add' %}" src="{% static 'images/w128h1281338911594add.png' %}"></a>{% endif %}</h3>
+	<ul class="nav nav-pills" role="tablist">
+	  {% for countryS in country_list %}
+		{% if countryS.countService > 0 %}
+			<li role="presentation"><a href="{% url 'travelondesk:countryServiceTickets' countryS.shortName %}">{% if LANGUAGE_CODE == "ru" %}{{ countryS.name }}{% else %}{{countryS.intName}}{% endif %}<span class="badge" style="background-color:#5cb85c">{{ countryS.countService }}</span></a></li>
+		{% elif countryS.popular %}
+			<li role="presentation"><a href="{% url 'travelondesk:countryServiceTickets' countryS.shortName %}">{% if LANGUAGE_CODE == "ru" %}{{ countryS.name }}{% else %}{{countryS.intName}}{% endif %}<span class="badge">{{ countryS.countService }}</span></a></li>
+		{% endif %} 
+	  {% endfor %}
+	</ul>
+	</div>
+	</div>
+    </div>
+	{% endblock %}
+	
+
+	{% block script %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+	<script>if ($(document).height() <= $(window).height())
+		$("footer.footer").addClass("navbar-fixed-bottom");</script>
+	<style>
+	.jumbotron {
+		background-image: url({% static 'images/pexels-photo-195678.jpeg' %});
+		background-size: cover;
+		color: #fff;
+	}
+	img {
+		margin-left:10px;
+		width:20px;
+		height:20px;
+	}
+	.language-form {
+		display: inline-block;
+	}
+	.body {
+    width:980px !important;
+	}
+	</style>
+	{% endblock %}

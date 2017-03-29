@@ -1,0 +1,27 @@
+{% extends "travelondesk/travelondesk_list.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block menuHref1 %}{% url 'travelondesk:countryServiceTickets' country_shortName %}{% endblock %}
+{% block menuHref2 %}{% url 'travelondesk:countryServiceTickets' country_shortName %}{% endblock %}
+{% block menuHref3 %}{% url 'travelondesk:countryCategoryServiceTickets' country_shortName category.0 %}{% endblock %}
+{% block menuHref4 %}{% url 'travelondesk:countryCategoryServiceTickets' country_shortName category.0 %}{% endblock %}
+{% block searchHref %}{% url 'travelondesk:countryCategoryServiceTickets' country_shortName ticket_category%}{% endblock %}
+{% block list %}
+	  {% for service in ticket_list %}
+	  <div class="well">
+		{% if service.img %}
+			<img data-src="holder.js/200x200" class="img-thumbnail" alt="100x100" src="{{ service.img.url }}" data-holder-rendered="true" style="width: 100px; height: 100px;" align="right">
+		{% endif %}
+		<h4 class="ticket-name"><a href="{% url 'travelondesk:serviceDetail' service.id %}"><strong>{{ service.name }}</strong></a></h4>
+		<small><a href="{% url 'travelondesk:countryCategoryServiceTickets' country_shortName service.category %}"><em>{{ service.get_category_display }}</em></a></small>
+		<small><p>{{ service.pubDate }}</p></small>
+		<p align="justify">{{ service.description }}</p>
+		{% if service.coast %}
+			<p>{% trans "Coast: " %}{{ service.coast }}</p>
+		{% endif %}
+		{% if service.country %}
+			<p class="place"><small>{{ service.place }}</small></p>
+		{% endif %}
+	  </div>		
+	  {% endfor %}
+{% endblock %}

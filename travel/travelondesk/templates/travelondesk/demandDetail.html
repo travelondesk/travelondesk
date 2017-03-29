@@ -1,0 +1,86 @@
+{% extends "travelondesk/travelondesk_base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+	<div class="row">
+	<hr>
+		<div class="col-md-9">
+			<h1>{{ demandticket.name }}</h1>
+
+			<p>{{ demandticket.pubDate }}</p>
+			<p><em>{{ demandticket.get_category_display }}</em></p>
+			<p>{{ demandticket.description }}</p>
+			<p>{% trans "Phone: " %}{{ demandticket.phone }}</p>
+			<p>{% trans "Email: " %}{{ demandticket.email }}</p>
+			<p>{% trans "Author: " %}<a href="{% url 'travelondesk:account' demandticket.author %}">{{ demandticket.author }}</a></p>
+			{% if user.id == demandticket.author.id %}
+				<a href="{% url 'travelondesk:demandEdit' demandticket.id %}">{% trans "Edit" %}</a>
+			{% endif %}
+			<hr>
+			<p id="id_place">{{ demandticket.place }}</p>
+			<div id="map"></div>
+		</div>
+		<div class="col-md-3" align="center">
+			{% if demandticket.img %}
+				<img data-src="holder.js/200x200" class="img-thumbnail" alt="200x200" src="{{ demandticket.img.url }}" data-holder-rendered="true" style="width: 200px; height: 200px;" vertical-align="middle" align="center">
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block script %}
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO2MASVqjjEiWhbKUSsjpIGOSFPWzoD_M&libraries=places&callback=initMap" async defer></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+		<script>if ($(document).height() <= $(window).height())
+		$("footer.footer").addClass("navbar-fixed-bottom");</script>
+<script>
+var geocoder;
+var map;
+var lat = Number('{{demandticket.latitude}}');
+var lng = Number('{{demandticket.longitude}}');
+function initMap() {
+	var myLatLng = {lat: lat, lng: lng};
+	geocoder = new google.maps.Geocoder();
+	map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 10,
+		center: myLatLng
+	});
+	var marker = new google.maps.Marker({
+            map: map,
+            position: myLatLng
+        });
+	console.log(lat + ' ' + lng);
+	console.log('{{demandticket.latitude}}');
+	//codeAddress();
+}
+function codeAddress() {
+    var address = document.getElementById("id_place").innerHTML;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert("Geocode was not successful for the following reason: " + status + address);
+      }
+    });
+  }
+</script>
+<style>
+      #map {
+        height: 200px;
+      }
+</style>
+{% endblock %}
+</body>
+</html> 

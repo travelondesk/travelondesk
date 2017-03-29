@@ -1,0 +1,371 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-24 14:49+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\travelondesk\models.py:35
+msgid "Active"
+msgstr ""
+
+#: .\travelondesk\models.py:36
+msgid "Non active"
+msgstr ""
+
+#: .\travelondesk\models.py:40
+msgid "Rent"
+msgstr ""
+
+#: .\travelondesk\models.py:41
+msgid "Service"
+msgstr ""
+
+#: .\travelondesk\models.py:42
+msgid "Goods"
+msgstr ""
+
+#: .\travelondesk\models.py:43
+msgid "Other"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\about.html:6
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:36
+msgid "About"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\about.html:16
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:42
+msgid "Add service"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\about.html:17
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:44
+msgid "Add demand"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:9
+msgid "Userinfo"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:10
+msgid "Username:"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:11
+msgid "Email:"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:12
+msgid "First name:"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:13
+msgid "Last name:"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:14
+msgid "Register date:"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:18
+msgid "My Services"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:20
+msgid "My Demands"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:22
+#: .\travelondesk\templates\travelondesk\demandDetail.html:18
+#: .\travelondesk\templates\travelondesk\serviceDetail.html:18
+msgid "Edit"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\account.html:24
+msgid "Change password"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\categoryDemandTickets.html:20
+#: .\travelondesk\templates\travelondesk\categoryServiceTickets.html:20
+#: .\travelondesk\templates\travelondesk\countryCategoryDemandTickets.html:20
+#: .\travelondesk\templates\travelondesk\countryCategoryServiceTickets.html:20
+#: .\travelondesk\templates\travelondesk\countryDemandTickets.html:20
+#: .\travelondesk\templates\travelondesk\countryServiceTickets.html:20
+#: .\travelondesk\templates\travelondesk\demandTickets.html:20
+#: .\travelondesk\templates\travelondesk\serviceTickets.html:20
+#: .\travelondesk\templates\travelondesk\userDemandTickets.html:19
+#: .\travelondesk\templates\travelondesk\userServiceTickets.html:19
+msgid "Coast: "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\contact.html:9
+msgid ""
+"All your feedback and suggestions about this site, cooperation and "
+"advertising, send to "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\contact.html:9
+msgid " or use the feedback form."
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\contact.html:10
+msgid "Your feedback make it possible for us to develop this project."
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\contact.html:11
+msgid "Best regards, "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\contact.html:17
+msgid "Theme:"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\contact.html:23
+msgid "E-mail:"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\contact.html:29
+msgid "Message:"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\contact.html:35
+msgid "Send me copy"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\contact.html:41
+msgid "Send"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandDetail.html:14
+#: .\travelondesk\templates\travelondesk\serviceDetail.html:14
+msgid "Phone: "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandDetail.html:15
+#: .\travelondesk\templates\travelondesk\serviceDetail.html:15
+msgid "Email: "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandDetail.html:16
+#: .\travelondesk\templates\travelondesk\serviceDetail.html:16
+msgid "Author: "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:12
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:13
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:12
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:13
+msgid "Name"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:19
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:20
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:19
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:20
+msgid "Category"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:26
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:27
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:26
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:27
+msgid "Description"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:33
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:34
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:33
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:34
+msgid "Phone"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:40
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:41
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:40
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:41
+msgid "E-mail"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:47
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:48
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:47
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:48
+msgid "Coast"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:54
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:55
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:54
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:55
+msgid "Imagine"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:57
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:58
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:57
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:58
+msgid "Choose picture..."
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:67
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:68
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:67
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:68
+msgid "State"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:74
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:75
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:74
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:75
+msgid "Place"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandEdit.html:98
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:93
+#: .\travelondesk\templates\travelondesk\serviceEdit.html:98
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:93
+#: .\travelondesk\templates\travelondesk\userEdit.html:28
+msgid "Save"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\demandTicketNew.html:7
+msgid "New demand"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:8
+msgid "It's a classified advertising for travelers around the world:"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:9
+msgid "House and transport rent"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:10
+msgid "Booking trips and tours"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:11
+msgid "Search for necessary goods and services and much more"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:12
+msgid "Learn more »"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:18
+msgid "Language: "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:35
+msgid ""
+"Publish your demands, and people in the country that you are going to visit "
+"will help you"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:38
+msgid ""
+"Add your services, products and everything that you can help a traveler in "
+"your country"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:43
+msgid "Demands"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:43
+#: .\travelondesk\templates\travelondesk\index.html:55
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:40
+msgid "Add"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\index.html:55
+msgid "Services"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\serviceTicketNew.html:7
+msgid "New service"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\thanks.html:6
+msgid "Thanks!"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\thanks.html:7
+msgid "Home"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:37
+msgid "Contact"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:52
+msgid "Profile"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:53
+msgid "Log out"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:55
+msgid "Log in and registration"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:73
+msgid "Contact us: "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_base.html:75
+msgid "Term of service"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_list.html:10
+#: .\travelondesk\templates\travelondesk\travelondesk_list.html:12
+msgid "All"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_list.html:26
+msgid "Enter search query"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_list.html:27
+msgid "Search"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\travelondesk_list.html:99
+msgid "Search for: "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\userDemandTickets.html:26
+#: .\travelondesk\templates\travelondesk\userServiceTickets.html:26
+msgid "State: "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\userDemandTickets.html:28
+#: .\travelondesk\templates\travelondesk\userServiceTickets.html:28
+msgid "Delete"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\userEdit.html:7
+msgid "Edit: "
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\userEdit.html:13
+msgid "First name"
+msgstr ""
+
+#: .\travelondesk\templates\travelondesk\userEdit.html:19
+msgid "Last name"
+msgstr ""

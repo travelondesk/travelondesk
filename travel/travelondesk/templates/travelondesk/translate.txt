@@ -1,0 +1,25 @@
+index.html
+Единая доска объявлений для путешественников по всему миру:
+It's a classified advertising for travelers around the world:
+
+Аренда жилья и транспорта
+House and transport rent
+
+Заказ экскурсий и туров
+Booking trips and tours
+
+Поиск необходимых товаров и услуг и многое другое
+Search for necessary goods and services and much more
+
+Публикуйте свои запросы, и, люди находящиеся в стране, которую вы собираетесь посетить, вам помогут.
+Publish your demands, and people in the country that you are going to visit will help you.
+
+Добавляйте свои услуги, товары и все то, чем Вы можете помочь путешественнику, находящемуся в вашей стране
+Add your services, products and everything that you can help a traveler in your country
+___________________________________________________________________________________________________________
+contact.html
+Все ваши отзывы и предложения по поводу работы сайта, сотрудничества и рекламы, направляйте на travelondesk.contact@gmail.com или воспользуйтесь формой обратной связи справа.
+All your feedback and suggestions about this site, cooperation and advertising, send to travelondesk.contact@gmail.com or use the feedback form on the right.
+
+Для дальнейшего развития проекта, нам важен каждый отзыв. С уважением, Travelondesk!
+Your feedback make it possible for us to develop this project. Best regards, Travelondesk!

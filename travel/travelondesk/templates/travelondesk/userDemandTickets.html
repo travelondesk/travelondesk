@@ -1,0 +1,34 @@
+{% extends "travelondesk/travelondesk_list.html" %}
+{% load staticfiles %}
+{% load i18n %}	
+{% block menuHref1 %}{% url 'travelondesk:userDemandTickets' username %}{% endblock %}
+{% block menuHref2 %}{% url 'travelondesk:userDemandTickets' username %}{% endblock %}
+{% block searchHref %}{% url 'travelondesk:userDemandTickets' username %}{% endblock %}
+{% block list %}
+	  {% for service in ticket_list %}
+	  {% if service.author == user %}
+		  <div class="well">
+			{% if service.img %}
+				<img data-src="holder.js/200x200" class="img-thumbnail" alt="100x100" src="{{ service.img.url }}" data-holder-rendered="true" style="width: 100px; height: 100px;" align="right">
+			{% endif %}
+			<h4 class="ticket-name"><a href="{% url 'travelondesk:demandDetail' service.id %}"><strong>{{ service.name }}</strong></a></h4>
+			<small><em>{{ service.get_category_display }}</em></a></small>
+			<small><p>{{ service.pubDate }}</p></small>
+			<p align="justify">{{ service.description }}</p>
+			{% if service.coast %}
+				<p>{% trans "Coast: " %}{{ service.coast }}</p>
+			{% endif %}
+			{% if service.country %}
+				<p class="place"><small>{{ service.place }}</small></p>
+			{% endif %}
+		   {% if service.author == user %}
+			<ul class="list-inline">
+				<li><small>{% trans 'State: ' %}{% if service.state == "active" %}<em style="color: #228B22">{{ service.get_state_display }}</em>{% else %}<em style="color: #FF0000">{{ service.get_state_display }}</em>{% endif %}</small></li>
+				<li>|</li>
+				<li><small><a align="right" href="{% url 'travelondesk:deleteDemand' service.id %}?next={% url 'travelondesk:userDemandTickets' service.author.username %}">{% trans "Delete" %}</a></small></li>
+			</ul>
+			{% endif %}
+		</div>
+	  {% endif %}
+	  {% endfor %}
+{% endblock %}

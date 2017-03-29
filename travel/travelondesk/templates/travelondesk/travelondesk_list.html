@@ -1,0 +1,141 @@
+{% extends "travelondesk/travelondesk_base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+	<div class="row">
+	{% block menu %}
+	<ul class="nav nav-tabs" role="tablist">
+		{% if ticket_category == null %}
+			<li role="presentation" class="active"><a href="{% block menuHref1 %}{% url 'travelondesk:demandTickets' %}{% endblock %}">{% trans "All" %}</a></li>
+		{% else %}
+			<li role="presentation"><a href="{% block menuHref2 %}{% url 'travelondesk:demandTickets' %}{% endblock %}">{% trans "All" %}</a></li>
+		{% endif %}	
+		{% for category in categorys %}
+			{% if ticket_category == category.0 %}
+				<li role="presentation" class="active"><a href="{% block menuHref3 %}{% url 'travelondesk:categoryDemandTickets' category.0 %}{% endblock %}">{{category.1}}</a></li>
+			{% else %}
+				<li role="presentation"><a href="{% block menuHref4 %}{% url 'travelondesk:categoryDemandTickets' category.0 %}{% endblock %}">{{category.1}}</a></li>
+			{% endif%}	
+		{% endfor %}
+    </ul>
+	{% endblock %}
+	{% block search %}
+	<form class="form-inline" action="{% block searchHref %}{% url 'travelondesk:demandTickets' %}{% endblock %}" method="GET"  >
+		<div align="center" class="input-append">
+			<input id="search-for" type="text" name="search" placeholder="{% trans 'Enter search query' %}" class="input form-control"/>
+			<button type="submit" class="btn btn-md btn-primary">{% trans "Search" %}</button>
+		</div>
+		<div id="search-param" align="center">
+		</div>
+	<hr>
+	</form> 
+	{% endblock %}
+	<div class="col-xs-12">
+		{% block list %}
+		{% endblock %}
+		{% block pagination %}
+			{% if ticket_list.paginator.num_pages > 1 %}
+			<div class="row" align="center">
+			<ul class="pagination pagination-primary">
+				{% if ticket_list.number > 3 %}
+					<li><a href="?page=1">1</a></li>
+					<li><a href="javascript:void(0);">...</a></li>
+				{% endif %}
+
+				{% for num in ticket_list.paginator.page_range %}
+					{% if num == ticket_list.number %}
+						{% if num|add:"-2" > 0 %}
+							<li><a href="?page={{ num|add:'-2' }}">{{ num|add:"-2" }}</a></li>
+						{% endif %}
+						{% if num|add:"-1" > 0 %}			
+							<li><a href="?page={{ num|add:'-1' }}">{{ num|add:"-1" }}</a></li>
+						{% endif %}	
+						<li class="active"><a href="?page={{ num }}">{{ num }}</a></li>
+						{% if num|add:"1" <= ticket_list.paginator.num_pages %}
+							<li><a href="?page={{ num|add:'1' }}">{{ num|add:"1" }}</a></li>
+						{% endif %}
+						{% if num|add:"2" <= ticket_list.paginator.num_pages %}			
+							<li><a href="?page={{ num|add:'2' }}">{{ num|add:"2" }}</a></li>
+						{% endif %}		
+					{% endif %}
+				{% endfor %}
+
+				{% if ticket_list.number < ticket_list.paginator.num_pages|add:"-2" %}
+					<li><a href="javascript:void(0);">...</a></li>
+					<li><a href="?page={{ ticket_list.paginator.num_pages }}">{{ ticket_list.paginator.num_pages }}</a></li>
+				{% endif %}				
+			</ul>
+			</div>
+			{% endif %}
+		{% endblock %}
+	</div>
+	</div>
+</div>
+{% endblock %}
+{% block script %}
+{% block js %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+<script>if ($(document).height() <= $(window).height())
+	$("footer.footer").addClass("navbar-fixed-bottom");</script>
+<script>
+addSearchResult()
+function addSearchResult() {
+	var Param = window.location.search
+	var qParam = Param.substring(Param.indexOf('search'))
+	if (qParam.indexOf('search') + 1) {
+		var pagination_page = document.getElementsByClassName("pagination-page")
+		for (var i=0; i < pagination_page.length; i++ ) {
+			var href = pagination_page[i].getAttribute("href")
+			pagination_page[i].setAttribute("href", href+'&'+qParam)
+		}
+	var searchInput = decodeURI(qParam.substring(qParam.indexOf('search=')+7));
+	var searchParam = document.getElementById("search-param")
+	var pParam = document.createElement('p');
+	pParam.innerHTML = "{% trans 'Search for: ' %}" + searchInput
+	searchParam.appendChild(pParam)
+	}
+}
+</script>
+{% endblock %}
+{% block style %}
+<style>
+.nav-sidebar > .active > a {
+	color: #fff;
+	background-color: #428bca;
+	}
+.step-links .btn-info {
+	width: 60px;
+	}
+.nav-tabs {
+    padding-left: 0;
+	margin-top: 20px;
+    margin-bottom: 20px;
+    list-style: none;
+}
+.form-inline .form-control {
+		width: 50%;
+		display: inline;
+	}
+.ticket-name {
+	margin-bottom: 0;
+	margin-top: 0;
+}
+img {
+	margin-left: 10px;
+}
+.place {
+	color: #337ab7 ;
+}
+@media screen and (min-width: 768px) {
+  .form-inline .form-control {
+    width: 50%;
+  }
+} 
+</style>
+{% endblock %}
+{% endblock %}
